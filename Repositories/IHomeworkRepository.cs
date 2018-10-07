@@ -7,6 +7,6 @@ namespace Repositories
 {
     public interface IHomeworkRepository : IRepository<Homework>
     {
-        IEnumerable<Homework> GetHomeworks();
+        void Mark(Homework homework);
     }
 }

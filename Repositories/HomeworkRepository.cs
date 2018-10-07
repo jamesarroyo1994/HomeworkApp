@@ -17,9 +17,9 @@ namespace Repositories
             this.context = context;
         }
 
-        public IEnumerable<Homework> GetHomeworks()
+        public void Mark(Homework homework)
         {
-            return context.Homeworks;
+            // logic
         }
 
     }

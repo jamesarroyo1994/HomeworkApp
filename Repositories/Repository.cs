@@ -24,13 +24,13 @@ namespace Repositories
         public void Create(T entity)
         {
             context.Set<T>().Add(entity);
-            context.SaveChanges();
+            SaveChanges();
         }
 
         public void Delete(T entity)
         {
             context.Set<T>().Remove(entity);
-            context.SaveChanges();
+            SaveChanges();
         }
 
         public IEnumerable<T> Find(Func<T, bool> predicate)
@@ -51,6 +51,11 @@ namespace Repositories
         public void Update(T entity)
         {
             T existing = context.Set<T>().Find(entity);
+        }
+
+        private void SaveChanges()
+        {
+            context.SaveChanges();
         }
     }
 }

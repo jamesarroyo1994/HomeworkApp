@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -13,6 +14,7 @@ using SchoolSystem.Models.ViewModels;
 
 namespace SchoolSystem.Controllers
 {
+    [Authorize]
     public class PortalController : Controller
     {
         public IHomeworkRepository homeworkRepo;
@@ -24,19 +26,10 @@ namespace SchoolSystem.Controllers
 
         public IActionResult Index()
         {
-            var models = homeworkRepo.GetAll().ToList();
-            var model = new HomeViewModel
-            {
-                UserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier)
-            };
+            var model = new HomeViewModel();
+
             return View(model);
         }
-
-        /*[HttpGet]
-        public IActionResult Homework()
-        {
-            return View();
-        }*/
 
         public IActionResult About()
         {
