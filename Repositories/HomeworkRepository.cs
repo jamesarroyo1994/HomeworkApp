@@ -19,7 +19,6 @@ namespace Repositories
 
         public void Mark(Homework homework)
         {
-            // logic
         }
 
     }

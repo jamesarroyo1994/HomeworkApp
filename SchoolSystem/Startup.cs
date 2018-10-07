@@ -30,8 +30,13 @@ namespace SchoolSystem
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SchoolSystemConnection")));
+
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IHomeworkRepository, HomeworkRepository>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();

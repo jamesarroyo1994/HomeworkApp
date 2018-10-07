@@ -17,11 +17,11 @@ namespace SchoolSystem.Controllers
     [Authorize]
     public class PortalController : Controller
     {
-        public IHomeworkRepository homeworkRepo;
+        public IHomeworkRepository _homeworkRepo;
 
         public PortalController(IHomeworkRepository homeworkRepo)
         {
-            this.homeworkRepo = homeworkRepo;
+            _homeworkRepo = homeworkRepo;
         }
 
         public IActionResult Index()
