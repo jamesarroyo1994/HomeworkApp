@@ -17,8 +17,12 @@ namespace Repositories
             this.context = context;
         }
 
+
+
+
+
         public void Mark(Homework homework)
-        {            
+        {            //var test = homework as Class
         }
 
     }

@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Repositories;
 using SchoolSystem.Models;
 using SchoolSystem.Models.ViewModels;
+using AutoMapper;
+using DataDomain.Data.Models;
 
 namespace SchoolSystem.Controllers
 {
@@ -18,10 +20,16 @@ namespace SchoolSystem.Controllers
     public class PortalController : Controller
     {
         public IHomeworkRepository _homeworkRepo;
+        public IStudentRepository _studentRepo;
+        private readonly IMapper _mapper;
 
-        public PortalController(IHomeworkRepository homeworkRepo)
+        public PortalController(IHomeworkRepository homeworkRepo,
+                                IStudentRepository studentRepo,
+                                IMapper mapper)
         {
             _homeworkRepo = homeworkRepo;
+            _studentRepo = studentRepo;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -42,6 +50,11 @@ namespace SchoolSystem.Controllers
         {
             ViewData["Message"] = "Your contact page.";
 
+            return View();
+        }
+
+        public IActionResult StudentRegister()
+        {
             return View();
         }
 

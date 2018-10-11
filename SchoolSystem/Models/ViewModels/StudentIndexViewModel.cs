@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace SchoolSystem.Models.ViewModels
 {
-    public class HomeworkViewModel
+    public class StudentIndexViewModel
     {
-        public string Description { get; set; }
+        public List<StudentViewModel> Students { get; set; }
     }
 }

@@ -13,6 +13,9 @@ using SchoolSystem.Models;
 using SchoolSystem.Services;
 using DataDomain.Data;
 using Repositories;
+using AutoMapper;
+using SchoolSystem.AutoMapper;
+using SchoolSystem.Models.ViewModels;
 
 namespace SchoolSystem
 {
@@ -31,6 +34,13 @@ namespace SchoolSystem
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SchoolSystemConnection")));
 
+            var config = new MapperConfiguration(map => {
+                map.AddProfile(new AutoMapperProfile());
+            });
+
+            var mapper = config.CreateMapper();
+
+            services.AddSingleton(mapper);
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IHomeworkRepository, HomeworkRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
