@@ -16,7 +16,7 @@ namespace SchoolSystem.ViewModelFactory
             _homeworkRepo = homeworkRepo;
         }
 
-        public HomeworkViewModel CreateHomeworkViewModel()
+        public async Task<HomeworkViewModel> CreateHomeworkViewModel()
         {
             return new HomeworkViewModel();
         }

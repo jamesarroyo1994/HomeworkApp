@@ -8,6 +8,6 @@ namespace SchoolSystem.ViewModelFactory
 {
     public interface IHomeworkFactory
     {
-        HomeworkViewModel CreateHomeworkViewModel();
+        Task<HomeworkViewModel> CreateHomeworkViewModel();
     }
 }

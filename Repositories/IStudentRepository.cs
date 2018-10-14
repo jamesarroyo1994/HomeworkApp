@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repositories
 {
     public interface IStudentRepository
     {
-        List<ApplicationUser> GetStudentByClassCode(string code);
-        List<ApplicationUser> GetStudents();
+        Task<List<ApplicationUser>> GetStudentByClassCode(string code);
+        Task<List<ApplicationUser>> GetStudents();
     }
 }

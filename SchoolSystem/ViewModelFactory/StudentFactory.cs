@@ -16,14 +16,15 @@ namespace SchoolSystem.ViewModelFactory
             _studentRepo = studentRepo;
         }
 
-        public StudentIndexViewModel CreateStudentRegisterViewModel()
+        public async Task<StudentIndexViewModel> CreateStudentRegisterViewModel()
         {
             var model = new StudentIndexViewModel();
-            var students = _studentRepo.GetStudents().Select(x => new StudentViewModel
-            {
-                Forename = x.Forename,
-                Surname = x.Surname
-            }).ToList();
+            var students = (await _studentRepo.GetStudents()).
+                Select(x => new StudentViewModel
+                {
+                    Forename = x.Forename,
+                    Surname = x.Surname
+                }).ToList();
 
             model.Students = students;
 

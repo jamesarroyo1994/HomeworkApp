@@ -36,15 +36,15 @@ namespace SchoolSystem.Controllers
             return View();
         }
 
-        public IActionResult StudentRegister()
+        public async Task<IActionResult> StudentRegister()
         {
-            var model = _studentFactory.CreateStudentRegisterViewModel();
+            var model = await _studentFactory.CreateStudentRegisterViewModel();
             return View(model);
         }
 
-        public IActionResult CreateHomework()
+        public async Task<IActionResult> CreateHomework()
         {
-            var model = _homeworkFactory.CreateHomeworkViewModel();
+            var model = await _homeworkFactory.CreateHomeworkViewModel();
 
             return View(model);
         }

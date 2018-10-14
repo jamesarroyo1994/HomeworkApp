@@ -9,7 +9,15 @@ namespace SchoolSystem.Models.ViewModels
     {
         public string Title { get; set; }
         public string Description { get; set; }
+        public IEnumerable<Subject> Subjects { get; set; }
+        public int SelectedSubjectId { get; set; }
         public int? PassMark { get; set; }
         public DateTime DateDue { get; set; }
+    }
+
+    public class Subject
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

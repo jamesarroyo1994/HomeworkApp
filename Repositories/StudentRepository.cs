@@ -5,6 +5,8 @@ using System.Text;
 using System.Linq;
 using AutoMapper;
 using SchoolSystem.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Repositories
 {
@@ -17,14 +19,16 @@ namespace Repositories
             _context = context;
         }
 
-        public List<ApplicationUser> GetStudentByClassCode(string code)
+        public async Task<List<ApplicationUser>> GetStudentByClassCode(string code)
         {
-            return _context.Users.ToList();
+            return await Task.Run(() => _context.Users
+                           .Include(x => x.Class)
+                           .Where(x => x.Class.ClassCode == code).ToList());
         }
 
-        public List<ApplicationUser> GetStudents()
+        public async Task<List<ApplicationUser>> GetStudents()
         {
-            return _context.Users.ToList();
+            return await Task.Run(() => _context.Users.ToListAsync());
         }
 
 
