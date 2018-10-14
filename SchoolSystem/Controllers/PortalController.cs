@@ -13,50 +13,50 @@ using SchoolSystem.Models;
 using SchoolSystem.Models.ViewModels;
 using AutoMapper;
 using DataDomain.Data.Models;
+using SchoolSystem.ViewModelFactory;
 
 namespace SchoolSystem.Controllers
 {
     [Authorize]
     public class PortalController : Controller
     {
-        public IHomeworkRepository _homeworkRepo;
-        public IStudentRepository _studentRepo;
+        public IStudentFactory _studentFactory;
+        public IHomeworkFactory _homeworkFactory;
         private readonly IMapper _mapper;
 
-        public PortalController(IHomeworkRepository homeworkRepo,
-                                IStudentRepository studentRepo,
-                                IMapper mapper)
+        public PortalController(IStudentFactory studentFactory, IHomeworkFactory homeworkFactory, IMapper mapper)
         {
-            _homeworkRepo = homeworkRepo;
-            _studentRepo = studentRepo;
+            _studentFactory = studentFactory;
+            _homeworkFactory = homeworkFactory;
             _mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            var model = new HomeViewModel();
-
-            return View(model);
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 
         public IActionResult StudentRegister()
         {
+            var model = _studentFactory.CreateStudentRegisterViewModel();
+            return View(model);
+        }
+
+        public IActionResult CreateHomework()
+        {
+            var model = _homeworkFactory.CreateHomeworkViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateHomework(HomeworkViewModel model)
+        {
             return View();
         }
+
+
 
         public IActionResult Error()
         {

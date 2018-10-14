@@ -3,4 +3,37 @@
 
 <h2>Student Register</h2>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Student Number
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.Students)
+        {
+            <tr>
+                <td>
+                    @student.Forename
+                </td>
+                <td>
+                    @student.Surname
+                </td>
+                <td>
+                    18922585
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
 

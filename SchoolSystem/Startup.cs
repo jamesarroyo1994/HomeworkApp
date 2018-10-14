@@ -16,6 +16,7 @@ using Repositories;
 using AutoMapper;
 using SchoolSystem.AutoMapper;
 using SchoolSystem.Models.ViewModels;
+using SchoolSystem.ViewModelFactory;
 
 namespace SchoolSystem
 {
@@ -46,6 +47,10 @@ namespace SchoolSystem
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<ISubjectRepository, SubjectRepository>();
+
+            // View Models
+            services.AddScoped<IStudentFactory, StudentFactory>();
+            services.AddScoped<IHomeworkFactory, HomeworkFactory>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

@@ -1,0 +1,21 @@
+﻿@using SchoolSystem.Models.ViewModels
+@model SchoolSystem.Models.ViewModels.HomeworkViewModel
+
+
+<h2>CreateHomework</h2>
+
+@using (@Html.BeginForm("CreateHomework", "Portal", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        </div>
+        <div class="col-md-8">
+            @Html.LabelFor(m => m.Description)
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        </div>
+    </div>
+}
+
