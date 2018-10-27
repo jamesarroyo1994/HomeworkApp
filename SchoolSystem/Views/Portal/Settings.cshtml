@@ -1,0 +1,27 @@
+﻿@model SchoolSystem.Models.ViewModels.SettingsViewModel
+
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<h2>Settings</h2>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(x => x.ClassId)
+@using (Html.BeginForm("Settings", "Portal", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label>Pass Message</label>
+                @Html.TextAreaFor(x => x.PassMessage, new { @class = "form-control" })
+                <label>Failed Message</label>
+                @Html.TextAreaFor(x => x.FailMessage, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+
+}
+

@@ -51,6 +51,7 @@ namespace SchoolSystem
             // View Models
             services.AddScoped<IStudentFactory, StudentFactory>();
             services.AddScoped<IHomeworkFactory, HomeworkFactory>();
+            services.AddScoped<IClassFactory, ClassFactory>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

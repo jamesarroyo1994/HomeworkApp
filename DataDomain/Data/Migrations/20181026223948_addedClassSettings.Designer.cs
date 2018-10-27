@@ -4,14 +4,16 @@ using DataDomain.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace SchoolSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181026223948_addedClassSettings")]
+    partial class addedClassSettings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,9 +115,9 @@ namespace SchoolSystem.Data.Migrations
 
                     b.Property<int>("ClassId");
 
-                    b.Property<string>("FailMessage");
+                    b.Property<string>("Key");
 
-                    b.Property<string>("PassMessage");
+                    b.Property<string>("Value");
 
                     b.HasKey("Id");
 

@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataDomain\DataDomain.csproj" />
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

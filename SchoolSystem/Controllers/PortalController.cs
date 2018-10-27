@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Repositories;
 using SchoolSystem.Models;
 using SchoolSystem.Models.ViewModels;
-using AutoMapper;
-using DataDomain.Data.Models;
 using SchoolSystem.ViewModelFactory;
 
 namespace SchoolSystem.Controllers
@@ -22,29 +14,54 @@ namespace SchoolSystem.Controllers
     {
         public IStudentFactory _studentFactory;
         public IHomeworkFactory _homeworkFactory;
-        private readonly IMapper _mapper;
+        public IClassFactory _classFactory;
 
-        public PortalController(IStudentFactory studentFactory, IHomeworkFactory homeworkFactory, IMapper mapper)
+        public ITeacherRepository _teacherRepository;
+
+        public int classId = 1;
+
+        public PortalController(IStudentFactory studentFactory, IHomeworkFactory homeworkFactory, IClassFactory classFactory, ITeacherRepository teacherRepository)
         {
             _studentFactory = studentFactory;
             _homeworkFactory = homeworkFactory;
-            _mapper = mapper;
+            _classFactory = classFactory;
+            _teacherRepository = teacherRepository;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public async Task<IActionResult> StudentRegister()
         {
             var model = await _studentFactory.CreateStudentRegisterViewModel();
             return View(model);
         }
 
+        [HttpGet]
         public async Task<IActionResult> CreateHomework()
         {
             var model = await _homeworkFactory.CreateHomeworkViewModel();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Settings()
+        {
+            var model = await _classFactory.CreateSettingsViewModel(classId);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Settings(SettingsViewModel model)
+        {
+            model.ClassId = classId;
+            await _teacherRepository.SaveSettings(model);
 
             return View(model);
         }
@@ -54,13 +71,6 @@ namespace SchoolSystem.Controllers
         public IActionResult CreateHomework(HomeworkViewModel model)
         {
             return View();
-        }
-
-
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Repositories
         }
 
         public void Mark(Homework homework)
-        {            //var test = homework as Class
+        {            
         }
 
     }

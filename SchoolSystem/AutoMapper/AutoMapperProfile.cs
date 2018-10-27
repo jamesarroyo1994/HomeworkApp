@@ -16,6 +16,10 @@ namespace SchoolSystem.AutoMapper
         {
             CreateMap<HomeworkViewModel, Homework>();
             CreateMap<Homework, HomeworkViewModel>();
+            CreateMap<SubjectViewModel, Subject>();
+            CreateMap<Subject, SubjectViewModel>();
+            CreateMap<Setting, SettingsViewModel>();
+            CreateMap<SettingsViewModel, Setting>();
         }
     }
 }
