@@ -1,29 +1,47 @@
 ﻿@using SchoolSystem.Models.ViewModels
 @model SchoolSystem.Models.ViewModels.HomeworkViewModel
 
-
-<h2>CreateHomework</h2>
+<h2>Set Homework</h2>
 
 @using (@Html.BeginForm("CreateHomework", "Portal", FormMethod.Post))
 {
+    @Html.HiddenFor(m => m.ClassId)
     @Html.AntiForgeryToken()
-    <div class="row">
+    if (@ViewBag.Success == true)
+    {
+        <div class="alert alert-success">Succesfully Saved</div>
+    }
+    <div class="row row--spaced">
+        <div class="col-xs-6">
+            @Html.LabelFor(m => m.Subjects)
+            @Html.DropDownListFor(m => m.SubjectId, new SelectList(Model.Subjects, "Id", "Name"), "Select a subject", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row row--spaced">
+        <div class="col-xs-6">
+            @Html.LabelFor(m => m.Description, new {@class= "mr-sm-2" })
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row row--spaced">
+        <div class="col-xs-6">
+            @Html.LabelFor(m => m.DateDue)
+            @Html.TextBoxFor(m => m.DateDue, new { @class = "form-control", @id = "datepicker" })
+        </div>
+    </div>
+    <div class="row row--spaced">
         <div class="col-xs-6">
             @Html.LabelFor(m => m.Title)
             @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
         </div>
+    </div>
+    <div class="row row--spaced">
         <div class="col-xs-6">
-            @Html.LabelFor(m => m.Subjects)
-            @Html.DropDownListFor(m => m.Subject, new SelectList(Model.Subjects), "Select a Subject", new { @class = "form-control" })
+            @Html.LabelFor(m => m.PassMark)
+            @Html.TextBoxFor(m => m.PassMark, new {@class="form-control", @type="number"})
         </div>
-        <div class="col-xs-6">
-            @Html.LabelFor(m => m.Description)
-            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
-        </div>
-        <div class="col-xs-6">
-            @Html.LabelFor(m => m.DateDue)
-            @Html.TextBoxFor( m => m.DateDue, new { @class="form-control", @id="datepicker" })
-        </div>
+    </div>
+    <div class="row row--spaced">
         <div class="col-xs-12" style="margin-top: 15px;">
             <button class="btn btn-primary" type="submit">Submit</button>
             <button class="btn btn-info" type="button" onclick="location.href='@Url.Action("Index")'">Back</button>

@@ -29,15 +29,9 @@ namespace SchoolSystem.ViewModelFactory
             return setting;
         }
 
-        public async Task<List<string>> GetSubjects()
+        public async Task<List<SubjectViewModel>> GetSubjects()
         {
-            var subjects = await _subjectRepository.GetAll();
-            var result = new List<string>();
-
-            foreach (var subject in subjects)
-            {
-                result.Add(subject.Name);
-            }
+            var result = _mapper.Map<List<SubjectViewModel>>(await _subjectRepository.GetAll());
 
             return result;
         }

@@ -33,3 +33,15 @@
         display: none;
     }
 }
+
+/* Custom */
+
+label {
+    font-weight: 500;
+    letter-spacing: 0.025em;
+}
+
+.row--spaced {
+    margin-top: 8.5px;
+    margin-bottom: 8.5px;
+}

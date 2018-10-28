@@ -4,10 +4,11 @@ using System.Text;
 
 namespace DataDomain.Data.Enums
 {
-    public enum SettingsEnum
+    public enum StudentStatusEnum
     {
-        Default = 0,
-        PassMessage = 1,
-        FailMessage = 2
+        Uknown = 0,
+        Red = 1,
+        Amber = 2,
+        Green = 3
     }
 }

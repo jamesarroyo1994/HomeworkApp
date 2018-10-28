@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DataDomain.Data.Models;
 using Repositories;
 using SchoolSystem.Models.ViewModels;
 using System;
@@ -12,12 +13,16 @@ namespace SchoolSystem.ViewModelFactory
     {
         public IHomeworkRepository _homeworkRepo;
         public ISubjectRepository _subjectRepo;
+
+        public IClassFactory _classFactory;
+
         public IMapper _mapper;
 
-        public HomeworkFactory(IHomeworkRepository homeworkRepo, ISubjectRepository subjectRepo, IMapper mapper)
+        public HomeworkFactory(IHomeworkRepository homeworkRepo, ISubjectRepository subjectRepo, IMapper mapper, IClassFactory classFactory)
         {
             _homeworkRepo = homeworkRepo;
             _subjectRepo = subjectRepo;
+            _classFactory = classFactory;
             _mapper = mapper;
         }
 
@@ -39,11 +44,18 @@ namespace SchoolSystem.ViewModelFactory
             return model;
         }
 
-        public async Task<HomeworkViewModel> CreateHomeworkViewModel()
+        public async Task<HomeworkViewModel> CreateHomeworkViewModel(int classId)
         {
-            var result = new HomeworkViewModel();
+            var model = new HomeworkViewModel();
+            model.ClassId = classId;
+            model.Subjects = await _classFactory.GetSubjects();
 
-            return new HomeworkViewModel();
+            return model;
+        }
+
+        public async Task Create(HomeworkViewModel model)
+        {
+            await _homeworkRepo.Create(_mapper.Map<Homework>(model));
         }
     }
 }
