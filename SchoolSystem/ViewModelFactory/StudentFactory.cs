@@ -10,11 +10,23 @@ namespace SchoolSystem.ViewModelFactory
     public class StudentFactory : IStudentFactory
     {
         public IStudentRepository _studentRepo;
+        int classId = 1;
 
         public StudentFactory(IStudentRepository studentRepo)
         {
             _studentRepo = studentRepo;
         }
+
+        public Task<HomeworkIndexViewModel> CreateHomeworkViewModel()
+        {
+            throw new NotImplementedException();
+        }
+
+        /* public Task<HomeworkIndexViewModel> CreateHomeworkViewModel()
+        {
+            var model = new HomeworkIndexViewModel();
+            var homeworks = _studentRepo.GetHomeworks(classId);
+        } */
 
         public async Task<StudentIndexViewModel> CreateStudentRegisterViewModel()
         {

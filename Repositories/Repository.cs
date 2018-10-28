@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repositories
 {
@@ -16,44 +17,44 @@ namespace Repositories
             this.context = context;
         }
 
-        public int Count(Func<T, bool> predicate)
+        public async Task<int> Count(Func<T, bool> predicate)
         {
             return context.Set<T>().Count(predicate);
         }
 
-        public void Create(T entity)
+        public async Task Create(T entity)
         {
             context.Set<T>().Add(entity);
-            SaveChanges();
+            await SaveChanges();
         }
 
-        public void Delete(T entity)
+        public async Task Delete(T entity)
         {
             context.Set<T>().Remove(entity);
-            SaveChanges();
+            await SaveChanges();
         }
 
-        public IEnumerable<T> Find(Func<T, bool> predicate)
+        public async Task<IEnumerable<T>> Find(Func<T, bool> predicate)
         {
             return context.Set<T>().Where(predicate);
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
             return context.Set<T>().ToList();
         }
 
-        public T GetById(int id)
+        public async Task<T> GetById(int id)
         {
             return context.Set<T>().Find(id);
         }
 
-        public void Update(T entity)
+        public async Task Update(T entity)
         {
             T existing = context.Set<T>().Find(entity);
         }
 
-        private void SaveChanges()
+        private async Task SaveChanges()
         {
             context.SaveChanges();
         }

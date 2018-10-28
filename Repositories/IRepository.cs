@@ -8,18 +8,18 @@ namespace Repositories
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAll();
 
-        IEnumerable<T> Find(Func<T, bool> predicate);
+        Task<IEnumerable<T>> Find(Func<T, bool> predicate);
 
-        T GetById(int id);
+        Task<T> GetById(int id);
 
-        void Create(T entity);
+        Task Create(T entity);
 
-        void Update(T entity);
+        Task Update(T entity);
 
-        void Delete(T entity);
+        Task Delete(T entity);
 
-        int Count(Func<T, bool> predicate);
+        Task<int> Count(Func<T, bool> predicate);
     }
 }

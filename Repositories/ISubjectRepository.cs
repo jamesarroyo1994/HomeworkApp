@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public interface ISubjectRepository
+    public interface ISubjectRepository : IRepository<Subject>
     {
-        Task<List<Subject>> GetSubjects();
     }
 }

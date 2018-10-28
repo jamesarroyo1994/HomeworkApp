@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Remove="Data\Migrations\20181026223743_addedClassSettings.cs" />
+    <Compile Remove="Data\Migrations\20181027174916_addedNavigationIdToHomework.cs" />
   </ItemGroup>
 
   <ItemGroup>

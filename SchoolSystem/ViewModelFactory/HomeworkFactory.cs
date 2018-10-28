@@ -21,10 +21,27 @@ namespace SchoolSystem.ViewModelFactory
             _mapper = mapper;
         }
 
+        public async Task<HomeworkIndexViewModel> CreateHomeworkIndexViewModel(int classId)
+        {
+            var model = new HomeworkIndexViewModel();
+            var result = await _homeworkRepo.GetHomeworks(classId);
+
+            model.Homeworks = result.Select(x => new HomeworkViewModel()
+            {
+                Title = x.Title,
+                Description = x.Description,
+                Subject = _subjectRepo.GetById(x.SubjectId).Result.Name,
+                DateDue = x.DateDue,
+                DateSet = x.DateSet,
+               
+            }).ToList();
+
+            return model;
+        }
+
         public async Task<HomeworkViewModel> CreateHomeworkViewModel()
         {
             var result = new HomeworkViewModel();
-            result.Subjects = _mapper.Map<List<SubjectViewModel>>(await _subjectRepo.GetSubjects());
 
             return new HomeworkViewModel();
         }

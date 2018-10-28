@@ -42,9 +42,17 @@ namespace SchoolSystem.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Homework()
+        {
+            var model = await _homeworkFactory.CreateHomeworkIndexViewModel(classId);
+            return View(model);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> CreateHomework()
         {
-            var model = await _homeworkFactory.CreateHomeworkViewModel();
+            var model = new HomeworkViewModel();
+            model.Subjects = await _classFactory.GetSubjects();
 
             return View(model);
         }

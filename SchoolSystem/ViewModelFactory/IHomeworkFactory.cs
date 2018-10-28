@@ -9,5 +9,6 @@ namespace SchoolSystem.ViewModelFactory
     public interface IHomeworkFactory
     {
         Task<HomeworkViewModel> CreateHomeworkViewModel();
+        Task<HomeworkIndexViewModel> CreateHomeworkIndexViewModel(int classId);
     }
 }

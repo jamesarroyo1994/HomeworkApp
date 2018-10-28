@@ -1,34 +1,40 @@
 ﻿@using SchoolSystem.Models.ViewModels
-@model StudentIndexViewModel
+@model HomeworkIndexViewModel
 
-<h2>Student Register</h2>
+<h2>Homeworks</h2>
 
 <table class="table" id="dataTable">
     <thead>
         <tr>
             <th>
-                First Name
+                Subject
             </th>
             <th>
-                Last Name
+                Title
             </th>
             <th>
-                Student Number
+                Date Set
+            </th>
+            <th>
+                Date Due
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var student in Model.Students)
+        @foreach (var homework in Model.Homeworks)
         {
             <tr>
                 <td>
-                    @student.Forename
+                    @homework.Subject
                 </td>
                 <td>
-                    @student.Surname
+                    @homework.Title
                 </td>
                 <td>
-                    18922585
+                    @homework.DateSet
+                </td>
+                <td>
+                    @homework.DateDue
                 </td>
             </tr>
         }
@@ -41,7 +47,6 @@
         <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index")'">Back</button>
     </div>
 </div>
-
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function () {

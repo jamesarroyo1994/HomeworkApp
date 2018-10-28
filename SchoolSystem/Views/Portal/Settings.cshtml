@@ -5,6 +5,14 @@
 }
 
 <h2>Settings</h2>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="alert alert-info">
+            Please configure your class settings here
+        </div>
+    </div>
+</div>
+
 @Html.AntiForgeryToken()
 @Html.HiddenFor(x => x.ClassId)
 @using (Html.BeginForm("Settings", "Portal", FormMethod.Post))
@@ -13,13 +21,14 @@
         <div class="col-xs-6">
             <div class="form-group">
                 <label>Pass Message</label>
-                @Html.TextAreaFor(x => x.PassMessage, new { @class = "form-control" })
+                @Html.TextAreaFor(x => x.PassMessage, new { @class = "form-control", @style="margin-top:7.5px;margin-bottom:7.5px;" })
                 <label>Failed Message</label>
-                @Html.TextAreaFor(x => x.FailMessage, new { @class = "form-control" })
+                @Html.TextAreaFor(x => x.FailMessage, new { @class = "form-control", @style = "margin-top:7.5px;margin-bottom:7.5px;" })
             </div>
         </div>
         <div class="col-xs-12">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("Index")'">Back</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </div>
 

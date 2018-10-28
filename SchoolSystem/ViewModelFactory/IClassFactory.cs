@@ -9,5 +9,6 @@ namespace SchoolSystem.ViewModelFactory
     public interface IClassFactory
     {
         Task<SettingsViewModel> CreateSettingsViewModel(int classId);
+        Task<List<string>> GetSubjects();
     }
 }

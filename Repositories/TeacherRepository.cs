@@ -25,14 +25,7 @@ namespace Repositories
         public async Task<Setting> GetSettings(int classId)
         {
             var result = _context.Settings.FirstOrDefault(x => x.ClassId == classId);
-            var setting = new Setting();
-
-            if (result != null)
-            {
-                return result;
-            }
-
-            return setting;
+            return result;
         }
 
         public async Task SaveSettings(SettingsViewModel model)
@@ -44,10 +37,12 @@ namespace Repositories
                 setting.PassMessage = model.PassMessage;
                 setting.FailMessage = model.FailMessage;
             }
+            else
+            {
+                setting = _mapper.Map<Setting>(model);
+                _context.Settings.Add(setting);
+            }
 
-            // setting = _mapper.Map<Setting>(model);
-            
-            _context.Settings.Add(setting);
             _context.SaveChanges();
         }
     }

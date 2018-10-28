@@ -9,15 +9,10 @@ namespace SchoolSystem.Models.ViewModels
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public List<SubjectViewModel> Subjects { get; set; }
-        public int SelectedSubjectId { get; set; }
-        public int? PassMark { get; set; }
+        public int SubjectId { get; set; }
+        public List <string> Subjects { get; set; }
+        public string Subject { get; set; }
         public DateTime DateDue { get; set; }
-    }
-
-    public class SubjectViewModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public DateTime DateSet { get; set; }
     }
 }

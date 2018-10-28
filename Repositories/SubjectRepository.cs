@@ -9,18 +9,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Repositories
 {
-    public class SubjectRepository : ISubjectRepository
+    public class SubjectRepository : Repository<Subject>, ISubjectRepository
     {
         private ApplicationDbContext _context;
 
-        public SubjectRepository(ApplicationDbContext context)
+        public SubjectRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
-        }
-
-        public async Task<List<Subject>> GetSubjects()
-        {
-            return await Task.Run(() => _context.Subjects.ToListAsync());
         }
     }
 }
