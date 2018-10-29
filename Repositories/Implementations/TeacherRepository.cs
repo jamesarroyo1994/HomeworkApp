@@ -2,12 +2,12 @@
 using DataDomain.Data;
 using DataDomain.Data.Enums;
 using DataDomain.Data.Models;
-using SchoolSystem.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModels;
 
 namespace Repositories
 {
@@ -28,7 +28,7 @@ namespace Repositories
             return result;
         }
 
-        public async Task SaveSettings(SettingsViewModel model)
+        public async Task SaveSettings(SettingsModel model)
         {
             var setting = _context.Settings.FirstOrDefault(x => x.ClassId == model.ClassId);
            

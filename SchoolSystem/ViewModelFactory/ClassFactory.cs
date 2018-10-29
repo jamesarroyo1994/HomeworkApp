@@ -4,10 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Repositories;
-using SchoolSystem.Models.ViewModels;
+using ViewModels;
 
 namespace SchoolSystem.ViewModelFactory
 {
+    public interface IClassFactory
+    {
+        Task<SettingsModel> CreateSettingsViewModel(int classId);
+        Task<List<SubjectModel>> GetSubjects();
+    }
+
     public class ClassFactory : IClassFactory
     {
         public ITeacherRepository _teacherRepository;
@@ -21,17 +27,17 @@ namespace SchoolSystem.ViewModelFactory
             _mapper = mapper;
         }
 
-        public async Task<SettingsViewModel> CreateSettingsViewModel(int classId)
+        public async Task<SettingsModel> CreateSettingsViewModel(int classId)
         {
             var result = await _teacherRepository.GetSettings(classId);
-            var setting = _mapper.Map<SettingsViewModel>(result);
+            var setting = _mapper.Map<SettingsModel>(result);
 
             return setting;
         }
 
-        public async Task<List<SubjectViewModel>> GetSubjects()
+        public async Task<List<SubjectModel>> GetSubjects()
         {
-            var result = _mapper.Map<List<SubjectViewModel>>(await _subjectRepository.GetAll());
+            var result = _mapper.Map<List<SubjectModel>>(await _subjectRepository.GetAll());
 
             return result;
         }

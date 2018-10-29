@@ -1,4 +1,4 @@
-﻿using SchoolSystem.Models.ViewModels;
+﻿using ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +14,12 @@ namespace SchoolSystem.AutoMapper
     {
         public AutoMapperProfile()
         {
-            CreateMap<HomeworkViewModel, Homework>();
-            CreateMap<Homework, HomeworkViewModel>();
-            CreateMap<Setting, SettingsViewModel>();
-            CreateMap<SettingsViewModel, Setting>();
-            CreateMap<Subject, SubjectViewModel>();
-            CreateMap<SubjectViewModel, Subject>();
+            CreateMap<HomeworkModel, Homework>();
+            CreateMap<Homework, HomeworkModel>();
+            CreateMap<Setting, SettingsModel>();
+            CreateMap<SettingsModel, Setting>();
+            CreateMap<Subject, SubjectModel>();
+            CreateMap<SubjectModel, Subject>();
         }
     }
 }

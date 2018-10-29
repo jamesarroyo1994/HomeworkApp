@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using DataDomain.Data.Models;
-using SchoolSystem.Models.ViewModels;
+using ViewModels;
 
 namespace Repositories
 {
     public interface ITeacherRepository 
     {
-        Task SaveSettings(SettingsViewModel settings);
+        Task SaveSettings(SettingsModel settings);
         Task<Setting> GetSettings(int classId);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DataDomain.Data.Models;
 using Repositories;
-using SchoolSystem.Models.ViewModels;
+using ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,13 @@ using System.Threading.Tasks;
 
 namespace SchoolSystem.ViewModelFactory
 {
+    public interface IHomeworkFactory
+    {
+        Task<HomeworkModel> CreateHomeworkViewModel(int classId);
+        Task<HomeworkIndexModel> CreateHomeworkIndexViewModel(int classId);
+        Task Create(HomeworkModel homework);
+    }
+
     public class HomeworkFactory : IHomeworkFactory
     {
         public IHomeworkRepository _homeworkRepo;
@@ -26,12 +33,12 @@ namespace SchoolSystem.ViewModelFactory
             _mapper = mapper;
         }
 
-        public async Task<HomeworkIndexViewModel> CreateHomeworkIndexViewModel(int classId)
+        public async Task<HomeworkIndexModel> CreateHomeworkIndexViewModel(int classId)
         {
-            var model = new HomeworkIndexViewModel();
+            var model = new HomeworkIndexModel();
             var result = await _homeworkRepo.GetHomeworks(classId);
 
-            model.Homeworks = result.Select(x => new HomeworkViewModel()
+            model.Homeworks = result.Select(x => new HomeworkModel()
             {
                 Title = x.Title,
                 Description = x.Description,
@@ -44,16 +51,16 @@ namespace SchoolSystem.ViewModelFactory
             return model;
         }
 
-        public async Task<HomeworkViewModel> CreateHomeworkViewModel(int classId)
+        public async Task<HomeworkModel> CreateHomeworkViewModel(int classId)
         {
-            var model = new HomeworkViewModel();
+            var model = new HomeworkModel();
             model.ClassId = classId;
             model.Subjects = await _classFactory.GetSubjects();
 
             return model;
         }
 
-        public async Task Create(HomeworkViewModel model)
+        public async Task Create(HomeworkModel model)
         {
             await _homeworkRepo.Create(_mapper.Map<Homework>(model));
         }

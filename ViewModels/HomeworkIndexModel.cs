@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SchoolSystem.Models.ViewModels
+namespace ViewModels
 {
-    public class HomeworkIndexViewModel
+    public class HomeworkIndexModel
     {
         public int ClassId { get; set; }
-        public List<HomeworkViewModel> Homeworks { get; set; }
+        public List<HomeworkModel> Homeworks { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repositories;
 using SchoolSystem.Models;
-using SchoolSystem.Models.ViewModels;
+using ViewModels;
 using SchoolSystem.ViewModelFactory;
 
 namespace SchoolSystem.Controllers
@@ -62,7 +62,7 @@ namespace SchoolSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateHomework(HomeworkViewModel model)
+        public async Task<IActionResult> CreateHomework(HomeworkModel model)
         {
             ViewBag.Success = true;
             model.Subjects = await _classFactory.GetSubjects();
@@ -81,7 +81,7 @@ namespace SchoolSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Settings(SettingsViewModel model)
+        public async Task<IActionResult> Settings(SettingsModel model)
         {
             model.ClassId = classId;
             await _teacherRepository.SaveSettings(model);

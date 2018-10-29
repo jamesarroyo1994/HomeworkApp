@@ -1,5 +1,5 @@
 ﻿using Repositories;
-using SchoolSystem.Models.ViewModels;
+using ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace SchoolSystem.ViewModelFactory
 {
+    public interface IStudentFactory
+    {
+        Task<StudentIndexModel> CreateStudentRegisterViewModel();
+        Task<HomeworkIndexModel> CreateHomeworkViewModel();
+    }
+
     public class StudentFactory : IStudentFactory
     {
         public IStudentRepository _studentRepo;
@@ -17,7 +23,7 @@ namespace SchoolSystem.ViewModelFactory
             _studentRepo = studentRepo;
         }
 
-        public Task<HomeworkIndexViewModel> CreateHomeworkViewModel()
+        public Task<HomeworkIndexModel> CreateHomeworkViewModel()
         {
             throw new NotImplementedException();
         }
@@ -28,11 +34,11 @@ namespace SchoolSystem.ViewModelFactory
             var homeworks = _studentRepo.GetHomeworks(classId);
         } */
 
-        public async Task<StudentIndexViewModel> CreateStudentRegisterViewModel()
+        public async Task<StudentIndexModel> CreateStudentRegisterViewModel()
         {
-            var model = new StudentIndexViewModel();
+            var model = new StudentIndexModel();
             var students = (await _studentRepo.GetStudents()).
-                Select(x => new StudentViewModel
+                Select(x => new StudentModel
                 {
                     Forename = x.Forename,
                     Surname = x.Surname
