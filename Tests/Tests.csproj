@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3702668B-26E0-4ED2-9982-5EFE9E957848}</ProjectGuid>
+    <ProjectGuid>{2E9D604F-C6CC-43C9-A5C1-A3DE57538302}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SchoolSystem.UnitTests</RootNamespace>
-    <AssemblyName>SchoolSystem.UnitTests</AssemblyName>
+    <RootNamespace>Tests</RootNamespace>
+    <AssemblyName>Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -48,29 +48,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StudentTests.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataDomain\DataDomain.csproj">
-      <Project>{d9724edd-f36a-4667-a318-d9e569c76e3b}</Project>
-      <Name>DataDomain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Repositories\Repositories.csproj">
-      <Project>{fff8eafc-08e6-443c-bd5c-651cc2d43166}</Project>
-      <Name>Repositories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SchoolSystem\SchoolSystem.csproj">
-      <Project>{abd4b813-72b0-46b9-889c-a18c5dc20d19}</Project>
-      <Name>SchoolSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ViewModels\ViewModels.csproj">
-      <Project>{b8238c13-42d2-4896-a4d0-d7b3aa42f7a1}</Project>
-      <Name>ViewModels</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
