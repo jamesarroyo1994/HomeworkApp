@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace Repositories
-{
-    public class StudentRepository : IStudentRepository
+
+{   public class StudentRepository : IStudentRepository
     {
         public ApplicationDbContext _context;
 
@@ -21,14 +21,14 @@ namespace Repositories
 
         public async Task<List<ApplicationUser>> GetStudentByClassCode(string code)
         {
-            return await Task.Run(() => _context.Users
-                           .Include(x => x.Class)
-                           .Where(x => x.Class.ClassCode == code).ToList());
+            return await  _context.Users
+                          .Include(x => x.Class)
+                          .Where(x => x.Class.ClassCode == code).ToListAsync();
         }
 
         public async Task<List<ApplicationUser>> GetStudents()
         {
-            return await Task.Run(() => _context.Users.ToListAsync());
+            return await _context.Users.ToListAsync();
         }
 
 

@@ -28,12 +28,6 @@ namespace SchoolSystem.ViewModelFactory
             throw new NotImplementedException();
         }
 
-        /* public Task<HomeworkIndexViewModel> CreateHomeworkViewModel()
-        {
-            var model = new HomeworkIndexViewModel();
-            var homeworks = _studentRepo.GetHomeworks(classId);
-        } */
-
         public async Task<StudentIndexModel> CreateStudentRegisterViewModel()
         {
             var model = new StudentIndexModel();

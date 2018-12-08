@@ -46,7 +46,7 @@ namespace Repositories
 
         public async Task<T> GetById(int id)
         {
-            return context.Set<T>().Find(id);
+            return await context.Set<T>().FindAsync(id);
         }
 
         public async Task Update(T entity)

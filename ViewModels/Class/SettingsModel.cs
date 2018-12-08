@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace ViewModels
 {
-    public class SettingsModel
+    public class SettingsModel : BaseModel
     {
-        public int ClassId { get; set; }
         public string PassMessage { get; set; }
         public string FailMessage { get; set; }
     }

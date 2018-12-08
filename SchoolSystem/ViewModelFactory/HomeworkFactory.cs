@@ -37,25 +37,23 @@ namespace SchoolSystem.ViewModelFactory
         {
             var model = new HomeworkIndexModel();
             var result = await _homeworkRepo.GetHomeworks(classId);
+            model.Homeworks = _mapper.Map<List<HomeworkModel>>(result);
 
-            model.Homeworks = result.Select(x => new HomeworkModel()
+            foreach (var homework in model.Homeworks)
             {
-                Title = x.Title,
-                Description = x.Description,
-                Subject = _subjectRepo.GetById(x.SubjectId).Result.Name,
-                DateDue = x.DateDue,
-                DateSet = x.DateSet,
-               
-            }).ToList();
+                homework.Subject = _subjectRepo.GetById(homework.SubjectId).Result.Name;
+            }
 
             return model;
         }
 
         public async Task<HomeworkModel> CreateHomeworkViewModel(int classId)
         {
-            var model = new HomeworkModel();
-            model.ClassId = classId;
-            model.Subjects = await _classFactory.GetSubjects();
+            var model = new HomeworkModel
+            {
+                ClassId = classId,
+                Subjects = await _classFactory.GetSubjects()
+            };
 
             return model;
         }

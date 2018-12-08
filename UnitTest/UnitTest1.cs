@@ -1,4 +1,8 @@
+using Repositories;
 using System;
+using DataDomain.Data;
+using DataDomain.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace UnitTest
@@ -8,6 +12,8 @@ namespace UnitTest
         [Fact]
         public void Test1()
         {
+   
+
 
         }
     }

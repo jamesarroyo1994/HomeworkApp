@@ -10,6 +10,7 @@ using DataDomain.Data;
 using Repositories;
 using AutoMapper;
 using SchoolSystem.AutoMapper;
+using SchoolSystem.Helpers;
 using SchoolSystem.ViewModelFactory;
 
 namespace SchoolSystem
@@ -46,6 +47,9 @@ namespace SchoolSystem
             services.AddScoped<IStudentFactory, StudentFactory>();
             services.AddScoped<IHomeworkFactory, HomeworkFactory>();
             services.AddScoped<IClassFactory, ClassFactory>();
+
+            // Dependency Context
+            services.AddScoped<IDependencyContext, DependencyContext>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

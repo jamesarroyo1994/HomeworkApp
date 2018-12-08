@@ -1,36 +1,25 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Elmah;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repositories;
-using SchoolSystem.Models;
+using SchoolSystem.Helpers;
 using ViewModels;
 using SchoolSystem.ViewModelFactory;
+using ViewModels.Homeworks;
 
 namespace SchoolSystem.Controllers
 {
     [Authorize]
-    public class PortalController : Controller
+    public class PortalController : BaseController
     {
-        public IStudentFactory _studentFactory;
-        public IHomeworkFactory _homeworkFactory;
-        public IClassFactory _classFactory;
+        public IDependencyContext _context;
 
-        public ITeacherRepository _teacherRepository;
-        public IHomeworkRepository _homeworkRepository;
-
-        public int classId = 1;
-
-        public PortalController(IStudentFactory studentFactory, IHomeworkFactory homeworkFactory,
-                                IClassFactory classFactory, ITeacherRepository teacherRepository,
-                                IHomeworkRepository homeworkRepository)
+        public PortalController(IDependencyContext context) : base (context)
         {
-            _studentFactory = studentFactory;
-            _homeworkFactory = homeworkFactory;
-            _classFactory = classFactory;
-            _teacherRepository = teacherRepository;
-            _homeworkRepository = homeworkRepository;
+            _context = context;
         }
 
         [HttpGet]
@@ -42,21 +31,28 @@ namespace SchoolSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> StudentRegister()
         {
-            var model = await _studentFactory.CreateStudentRegisterViewModel();
+            var model = await _context.StudentFactory.CreateStudentRegisterViewModel();
             return View(model);
         }
 
         [HttpGet]
         public async Task<IActionResult> Homeworks()
         {
-            var model = await _homeworkFactory.CreateHomeworkIndexViewModel(classId);
+            var model = await _context.HomeworkFactory.CreateHomeworkIndexViewModel(classId);
             return View(model);
         }
 
         [HttpGet]
         public async Task<IActionResult> CreateHomework()
         {
-            var model = await _homeworkFactory.CreateHomeworkViewModel(classId);
+            var model = await _context.HomeworkFactory.CreateHomeworkViewModel(classId);
+            return View(model);
+        }
+
+        public async Task<IActionResult> CreateQuestion(int homeworkId)
+        {
+            var model = new CreateQuestionModel();
+            model.Homework = await _context.HomeworkFactory.CreateHomeworkViewModel(classId);
             return View(model);
         }
 
@@ -64,10 +60,10 @@ namespace SchoolSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateHomework(HomeworkModel model)
         {
-            ViewBag.Success = true;
-            model.Subjects = await _classFactory.GetSubjects();
+            TempData["Success"] = "Some value";
+            model.Subjects = await _context.ClassFactory.GetSubjects();
             model.DateSet = DateTime.Now;
-            await _homeworkFactory.Create(model);
+            await _context.HomeworkFactory.Create(model);
 
             return View(model);
         }
@@ -75,7 +71,7 @@ namespace SchoolSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Settings()
         {
-            var model = await _classFactory.CreateSettingsViewModel(classId);
+            var model = await _context.ClassFactory.CreateSettingsViewModel(classId);
             return View(model);
         }
 
@@ -84,7 +80,7 @@ namespace SchoolSystem.Controllers
         public async Task<IActionResult> Settings(SettingsModel model)
         {
             model.ClassId = classId;
-            await _teacherRepository.SaveSettings(model);
+            await _context.TeacherRepository.SaveSettings(model);
 
             return View(model);
         }

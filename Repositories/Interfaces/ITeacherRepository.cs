@@ -7,7 +7,7 @@ using ViewModels;
 
 namespace Repositories
 {
-    public interface ITeacherRepository 
+    public interface ITeacherRepository
     {
         Task SaveSettings(SettingsModel settings);
         Task<Setting> GetSettings(int classId);

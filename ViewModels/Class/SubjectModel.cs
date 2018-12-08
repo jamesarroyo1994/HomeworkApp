@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ViewModels
 {
-    public class SubjectModel
+    public class SubjectModel : BaseModel
     {
         public string Name { get; set; }
         public int Id { get; set; }
